@@ -1,7 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 
 app = Flask(__name__)
 
+# dummy post data
 posts = [
     {
         'author':'Rudy',
@@ -10,7 +11,7 @@ posts = [
         'date_posted':'July 20, 2019'
     },
     {
-        'author':'Aunalla',
+        'author':'Aunallah',
         'title':'Blog Post 2',
         'content':'Second post content',
         'date_posted':'July 21, 2019'
