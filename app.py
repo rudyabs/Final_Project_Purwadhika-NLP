@@ -12,11 +12,12 @@ matplotlib.use('agg')
 app = Flask(__name__)
 
 @app.route('/')
+@app.route('/home')
 def home():
     return render_template("home.html")
 
 @app.route('/sms', methods=['GET','POST'])
-def spam():
+def sms():
     if request.method == 'GET':
         return render_template('sms.html', title='SMS')
     elif request.method == 'POST':
@@ -34,7 +35,7 @@ def spam():
         abort(404)
 
 @app.route('/tweet', methods=['GET','POST'])
-def emosi():
+def tweet():
     if request.method == 'GET':
         return render_template('tweet.html',title='Tweet')
     elif request.method == 'POST':
@@ -61,6 +62,20 @@ def emosi():
         return render_template("hasil_tweet.html", result=result, title="Hasil Tweet", graph=graph)
     else:
         abort(404)
+
+@app.route('/about')
+def about():
+    return render_template('about.html',title="About")
+
+@app.route('/login')
+def login():
+    return render_template('login.html', title="Log In")
+
+@app.route('/register')
+def register():
+    return render_template('register.html', title="Register")
+
+
 
 if __name__ == "__main__":
     model_spam = joblib.load('model_sgdc_spam')

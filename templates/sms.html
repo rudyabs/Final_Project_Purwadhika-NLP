@@ -1,10 +1,27 @@
 {% extends "layout.html" %}
 {% block content %}
 <center>
-<form action="http://localhost:5000/sms" method="POST" id="userform">
-    <p>Isi SMS yang akan diperiksa</p>
-    <input type="text" name="sms" placeholder="Masukan isi pesan sms disini">
-    <input type="submit" value="Submit Gan">
-</form>
+<div class="container">
+        <form role="form" id="isi-kalimat" action="http://localhost:5000/sms" method="POST">
+                    <br>
+                    <div class="starter-template">
+                        <h2>Klasifikasi SPAM SMS Indonesia (Beta)</h2>
+                    </div>
+                    <br><br>
+                  	<div class="row">
+                  		<div class="col-md-12">
+                  		<div class="form-group">
+                            <label for="smsform">Masukkan kalimat isi pesan SMS dan langsung tekan tombol analisa.</label>
+                            <textarea class="form-control textarea" rows="3" maxlength="500" name="sms" id="smsform" autofocus="" placeholder="Masukan isi pesan sms disini"></textarea>
+                  		</div>
+                  	</div>
+                    </div>
+                    <div class="row">
+                    <div class="col-md-12">
+                  <button id="button-analisis" type="submit" class="btn btn-outline-info">Analisa</button>
+                  </div>
+                  </div>
+        </form>
+    </div>
 </center>
 {% endblock content %}
