@@ -1,10 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
+    <center>
+        <br>
+        <br>
+        <br>
     <h1>Hasil dari analisa SMS anda merupakan {{result}}</h1>
-    <form action="http://localhost:5000/", method="GET">
-        <input type="submit" value="Kembali"/>
+        <br>
+        <a href="{{ url_for('sms') }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="false">Analisa Lagi</a>
+        <a href="{{ url_for('home') }}" class="btn btn-secondary btn-sm active" role="button" aria-pressed="false   ">Kembali ke Home</a>
     </form>
-    <form action="http://localhost:5000/sms", method="GET">
-        <input type="submit" value="Analisa SMS lain"/>
-    </form>
+    </center>
 {% endblock content %}

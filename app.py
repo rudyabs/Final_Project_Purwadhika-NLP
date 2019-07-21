@@ -67,15 +67,9 @@ def tweet():
 def about():
     return render_template('about.html',title="About")
 
-@app.route('/login')
-def login():
-    return render_template('login.html', title="Log In")
-
-@app.route('/register')
-def register():
-    return render_template('register.html', title="Register")
-
-
+@app.route('/saran')
+def saran():
+    return render_template('saran.html', title="Saran")
 
 if __name__ == "__main__":
     model_spam = joblib.load('model_sgdc_spam')
