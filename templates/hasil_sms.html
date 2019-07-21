@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Hasil dari analisa SMS anda merupakan {{result}}</h1>
+    <form action="http://localhost:5000/", method="GET">
+        <input type="submit" value="Kembali"/>
+    </form>
+    <form action="http://localhost:5000/sms", method="GET">
+        <input type="submit" value="Analisa SMS lain"/>
+    </form>
+{% endblock content %}

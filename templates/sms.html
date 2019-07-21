@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
+<center>
+<form action="http://localhost:5000/sms" method="POST" id="userform">
+    <p>Isi SMS yang akan diperiksa</p>
+    <input type="text" name="sms" placeholder="Masukan isi pesan sms disini">
+    <input type="submit" value="Submit Gan">
+</form>
+</center>
+{% endblock content %}

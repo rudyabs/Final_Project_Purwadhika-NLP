@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
+<center>
+    <form action="http://localhost:5000/tweet" method="POST" id="userform">
+        <p>Isi Tweet yang akan diperiksa</p>
+        <input type="text" name="tweet" placeholder="Masukan isi pesan tweet disini">
+        <input type="submit" value="Submit Gan">
+    </form>
+</center>
+{% endblock content %}

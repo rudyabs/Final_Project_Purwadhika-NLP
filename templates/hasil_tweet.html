@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Hasil dari analisa Tweet anda mengarah ke emosi - {{result}}</h1>
+    <br>
+    <img src="{{graph}}" align='middle'/>
+    <br>
+    <form action="http://localhost:5000/", method="GET">
+        <input type="submit" value="Kembali"/>
+    </form>
+    <form action="http://localhost:5000/tweet", method="GET">
+        <input type="submit" value="Analisa Tweet lain"/>
+    </form>
+{% endblock content %}
