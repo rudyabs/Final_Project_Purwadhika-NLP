@@ -1,6 +1,5 @@
-from flask import Flask, redirect, url_for, render_template, request, abort, jsonify
+from flask import Flask, url_for, render_template, request, abort
 import joblib
-import json
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -8,7 +7,6 @@ import matplotlib
 import io
 import base64
 from flask_mysqldb import MySQL
-
 
 
 matplotlib.use('agg')
@@ -26,7 +24,7 @@ app.config['MYSQL_DB'] = 'suggestion'
 def home():
     return render_template("home.html")
 
-@app.route('/sms', methods=['GET','POST'])
+@app.route('/sms', methods=['GET', 'POST'])
 def sms():
     if request.method == 'GET':
         return render_template('sms.html', title='SMS')
@@ -44,7 +42,7 @@ def sms():
     else:
         abort(404)
 
-@app.route('/tweet', methods=['GET','POST'])
+@app.route('/tweet', methods= ['GET', 'POST'])
 def tweet():
     if request.method == 'GET':
         return render_template('tweet.html',title='Tweet')
@@ -54,13 +52,14 @@ def tweet():
         result = result[0]
         probability_tweet = model_twitter.predict_proba([isi_tweet])
         probability_tweet = probability_tweet[0]
-        labels = ['anger','fear','happiness','love','sad']
+        labels = ['anger', 'fear', 'happiness', 'love', 'sad']
 
         # visualisasi - pie chart
         plt.close()
         plt.figure(figsize=(5,5))
         plt.title('Hasil analisa tweet')
-        plt.pie(x=probability_tweet, autopct='%1.1f%%', pctdistance=1.1, labeldistance=1.3, labels=labels)
+        plt.pie(x=probability_tweet, autopct='%1.1f%%', pctdistance=1.1, labeldistance=1.3)
+        plt.legend(labels)
         plt.tight_layout()
 
         img = io.BytesIO()
@@ -77,7 +76,7 @@ def tweet():
 def about():
     return render_template('about.html',title="About")
 
-@app.route('/saran', methods=['POST','GET'])
+@app.route('/saran', methods= ['POST', 'GET'])
 def saran():
     if request.method == 'GET':
         return render_template('saran.html', title="Saran")
@@ -88,16 +87,15 @@ def saran():
         email_opt = body['email_opt']
 
         cursor = MySQL.connection.cursor()
-        
         cursor.execute('INSERT INTO SARAN (description, category, email) VALUES (%s, %s, %s)', (saran1,saran2,email_opt))
         MySQL.connection.commit()
 
-        return render_template('complementary.html')
+        return render_template('complementary.html', title="Sukses")
 
     else:
         abort(404)
 
 if __name__ == "__main__":
     model_spam = joblib.load('model_sgdc_spam')
-    model_twitter = joblib.load('model_multinomial_twitter') 
+    model_twitter = joblib.load('model_multinomial_twitter')
     app.run(debug=True)
