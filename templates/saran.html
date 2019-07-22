@@ -1,3 +1,43 @@
 {% extends "layout.html" %}
 {% block content %}
+<form role="form" action="http://localhost:5000/saran" method="POST">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="form-group">
+                  <label for="saran1">Terima Kasih Anda dapat meluangkan waktu sejenak. Apa saran yang Anda dapat berikan?</label>
+                  <textarea class="form-control textarea" rows="3" maxlength="500" name="saran1" id="saran1" autofocus="" placeholder="Kami berharap Anda dapat membagikan pengalaman Anda. Berikan contoh jika ada."></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="col-md-12">
+                <label for="saran2" aria-required="true">Dalam hal apa saran Anda dapat membantu kami?</label>
+                <select class="form-control" id="saran2" name="saran2">
+                  <option value="Quality">Kualitas</option>
+                  <option value="Service">Pelayanan</option>
+                  <option value="Time">Waktu</option>
+                  <option value="Content">Konten</option>
+                  <option value="Other">Lainnya</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="container">
+        <div class="col-md-12">
+            <div class="form-group">
+                    <label for="email_opt">Terima Kasih atas waktu yang Anda berikan. Kami sangat menghargai bagaimana saran Anda dapat membantu kami dikemudian hari. <br><br> Sebelum Anda pergi, dapatkah kami meminta alamat email Anda agar kami dapat meninjau saran Anda lebih jauh jika dibutuhkan?</label>
+                    <input name="email_opt" type="email" class="form-control" id="email_opt" placeholder="Anda dapat mengkosongkan kolom ini jika Anda tidak berkenan.">
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <center>
+    <div class="row">
+        <div class="col-md-12">
+          <button id="button-saran" type="submit" class="btn btn-primary btn-lg">Kirim Saran Anda</button>
+        </div>
+    </div>
+</center>
+</form>
 {% endblock content %}

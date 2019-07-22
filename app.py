@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, render_template, request, abort
+from flask import Flask, redirect, url_for, render_template, request, abort, jsonify
 import joblib
 import json
 import numpy as np
@@ -7,9 +7,19 @@ import matplotlib.pyplot as plt
 import matplotlib
 import io
 import base64
+from flask_mysqldb import MySQL
+
+
 
 matplotlib.use('agg')
 app = Flask(__name__)
+MySQL = MySQL(app)
+
+app.config['MYSQL_HOST'] = 'localhost'
+app. config['MYSQL_USER'] = 'rudyabs'
+app.config['MYSQL_PASSWORD'] = 'Kecapi48'
+app.config['MYSQL_DB'] = 'suggestion'
+
 
 @app.route('/')
 @app.route('/home')
@@ -67,9 +77,25 @@ def tweet():
 def about():
     return render_template('about.html',title="About")
 
-@app.route('/saran')
+@app.route('/saran', methods=['POST','GET'])
 def saran():
-    return render_template('saran.html', title="Saran")
+    if request.method == 'GET':
+        return render_template('saran.html', title="Saran")
+    elif request.method == 'POST':
+        body = request.form
+        saran1 = body['saran1']
+        saran2 = body['saran2']
+        email_opt = body['email_opt']
+
+        cursor = MySQL.connection.cursor()
+        
+        cursor.execute('INSERT INTO SARAN (description, category, email) VALUES (%s, %s, %s)', (saran1,saran2,email_opt))
+        MySQL.connection.commit()
+
+        return render_template('complementary.html')
+
+    else:
+        abort(404)
 
 if __name__ == "__main__":
     model_spam = joblib.load('model_sgdc_spam')
